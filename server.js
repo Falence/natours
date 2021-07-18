@@ -19,11 +19,21 @@ const server = app.listen(port, () => {
     console.log(`App running on port: ${port}...`)
 })
 
-// handle unhandled promise rejection error
+// handle unhandled promise rejection error || For asynchronous code
 process.on('unhandledRejection', err => {
-    console.log(err.name, err.message)
     console.log('UNHANDLED REJECTION! 🔥 Shutting down...')
+    console.log(err)
     server.close(() => {
         process.exit(1)
     })
 })
+
+// handle uncaught exceptions || For synchronous code
+process.on('uncaughtException', err => {
+    console.log('UNCAUGHT EXCEPTION! 🔥 Shutting down...')
+    console.log(err.name, err.message)
+    server.close(() => {
+        process.exit(1)
+    })    
+})
+

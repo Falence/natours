@@ -38,7 +38,7 @@ const sendErrorProd = (err, res) => {
     // programming errors or other unknown errors: don't leak error details on prod
     } else {
         // Log the error
-        console.error('ERROR: ', err)
+        console.error('ERROR: 🔥', err)
 
         // Send generated message
         res.status(500).json({
