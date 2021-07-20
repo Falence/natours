@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please provide a password!'],
-        minlength: 8
+        minlength: 8,
+        select: false
     },
     passwordConfirm: {
         type: String,
@@ -30,9 +31,11 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Passwords are not the same!'
         }
-    }
+    },
+    passwordChangedAt: Date
 })
 
+// hash password
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next() // hash only when the password field is modified
 
@@ -40,6 +43,22 @@ userSchema.pre('save', async function(next) {
     this.passwordConfirm = undefined    // delete the 'passwordConfirm' field. we needed the field initially just for verification
     next()
 })
+
+// compare passwords on login
+userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
+    return await bcrypt.compare(candidatePassword, userPassword)
+}
+
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+    if (this.passwordChangedAt) {
+        const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 100)
+
+        return JWTTimestamp < changedTimestamp
+    }
+    
+    return false
+}
+
 
 const User = mongoose.model('User', userSchema)
 
