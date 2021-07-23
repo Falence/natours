@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
     passwordResetExpires: Date
 })
 
+
 // hash password
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next() // hash only when the password field is modified
@@ -51,6 +52,14 @@ userSchema.pre('save', async function(next) {
     this.passwordConfirm = undefined    // delete the 'passwordConfirm' field. we needed the field initially just for verification
     next()
 })
+
+userSchema.pre('save', function(next) {
+    if (!this.isModified('password') || this.isNew) return next()
+
+    this.passwordChangedAt = Date.now() - 1000
+    next()
+})
+
 
 // compare passwords on login
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
