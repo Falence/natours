@@ -36,7 +36,8 @@ app.use('/api', limiter) // limit the number of requests to the api routes to 10
 app.use(express.json( { limit: '10kb' } ))
 
 // Data sanitization against NoSQL query injection
-app.use(mongoSanitize())
+app.use(mongoSanitize())    // e.g - a user on logging in can use an email of {"$gt": ""}, which will validate successfully
+                            // This middleware stops things like that
 
 // Data sanitization against XSS
 app.use(xss())
