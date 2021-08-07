@@ -17,5 +17,6 @@ router
 router
     .route('/:id')
     .get(reviewController.getReview)
+    .delete(reviewController.deleteReview)
 
 module.exports = router
