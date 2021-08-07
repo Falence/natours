@@ -128,6 +128,14 @@ tourSchema.virtual('durationWeeks').get(function() {
     return this.duration / 7
 })
 
+// Virtual populate
+tourSchema.virtual('reviews', {
+    ref: 'Review',
+    foreignField: 'tour',
+    localField: '_id'
+})
+
+
 // Middlewares in Mongoose: document, query, aggregation and model middleware
 
 // Document middlewares
