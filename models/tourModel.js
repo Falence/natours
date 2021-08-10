@@ -124,8 +124,9 @@ const tourSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 })
 
+// Indexing our TOUR collection
 // tourSchema.index({price: 1})
-tourSchema.index({ price: 1, ratingsAverage: -1 })
+tourSchema.index({ price: 1, ratingsAverage: -1 })  // compound index
 tourSchema.index({ slug: 1 })
 
 
