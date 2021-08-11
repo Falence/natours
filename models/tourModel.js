@@ -129,6 +129,7 @@ const tourSchema = new mongoose.Schema({
 // tourSchema.index({price: 1})
 tourSchema.index({ price: 1, ratingsAverage: -1 })  // compound index
 tourSchema.index({ slug: 1 })
+tourSchema.index({ startLocation: '2dsphere' })
 
 
 // add virtual field when document is queried

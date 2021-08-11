@@ -117,3 +117,33 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     })
 
 })
+
+// /tours-within/:distance/center/:latlng/unit/:unit
+exports.getToursWithin = catchAsync(async (req, res, next) => {
+    const { distance, latlng, unit } = req.params
+    const [ lat, lng ] = latlng.split(',')
+
+    // calculate radius of the sphere from the distance (km or mi) with respect to the earth in radians
+    const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1
+
+    if (!lat || !lng) {
+        next(
+            new AppError(
+                'Please provide a latitude and longitude in the format "lat,lng"',
+                400
+            )
+        )
+    }
+
+    const tours = await Tour.find({
+        startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    })
+
+    res.status(200).json({
+        status: 'success',
+        results: tours.length, 
+        data: {
+            data: tours
+        }
+    })
+})
