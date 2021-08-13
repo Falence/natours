@@ -16,6 +16,7 @@ exports.getTour = catchAsync(async (req, res) => {
         .populate({ path: 'reviews', select: 'review rating user' })
 
     res.status(200).render('tour', {
+        title: `${tour.name} Tour`, 
         tour
     })
 })
