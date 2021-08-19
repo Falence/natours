@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
 const hpp = require('hpp')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
@@ -45,6 +46,7 @@ app.use('/api', limiter) // limit the number of requests to the api routes to 10
 
 // Body parser: reading the data from body into req.body
 app.use(express.json( { limit: '10kb' } ))
+app.use(cookieParser())
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize())    // e.g - a user on logging in can use an email of {"$gt": ""}, which will validate successfully
@@ -68,7 +70,7 @@ app.use(hpp({
 // Test middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString()
-    // console.log(req.headers)
+    console.log(req.cookies)
     next()
 })
 
