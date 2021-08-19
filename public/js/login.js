@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { showAlert } from './alerts'
 
 export const login = async (email, password) => {
     try {
@@ -12,14 +13,14 @@ export const login = async (email, password) => {
         })
 
         if (res.data.status === 'success') {
-            alert('Logged in successfully!')
+            showAlert('success', 'Logged in successfully')
             window.setTimeout(() => {
                 location.assign('/')
             }, 1500)    // redirect to home page after 1.5 seconds
         }
 
     } catch(err) {
-        alert(err.response.data.message)    // the err.response proty comes with axios
+        showAlert('error', err.response.data.message)    // the err.response proty comes with axios
     }
 }
 
