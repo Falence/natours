@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const login = async (email, password) => {
-    console.log(email, password)
     try {
         const res = await axios({
             method: 'post',
@@ -11,9 +10,16 @@ export const login = async (email, password) => {
                 password
             }
         })
-        console.log(res)
+
+        if (res.data.status === 'success') {
+            alert('Logged in successfully!')
+            window.setTimeout(() => {
+                location.assign('/')
+            }, 1500)    // redirect to home page after 1.5 seconds
+        }
+
     } catch(err) {
-        console.log(err.message)
+        alert(err.response.data.message)    // the err.response proty comes with axios
     }
 }
 
