@@ -107,6 +107,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     }
 
     req.user = currentUser
+    res.locals.user = currentUser
     next()
 })
 
@@ -134,7 +135,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
             // there is logged in user
             res.locals.user = currentUser
-            // The line above creates a veriable called "user" which will be accessible by all our pug templates
+            // The line above creates a variable called "user" which will be accessible by all our pug templates
             return next()
         }
     } catch(err) {
