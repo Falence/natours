@@ -46,6 +46,7 @@ app.use('/api', limiter) // limit the number of requests to the api routes to 10
 
 // Body parser: reading the data from body into req.body
 app.use(express.json( { limit: '10kb' } ))
+app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(cookieParser())
 
 // Data sanitization against NoSQL query injection
