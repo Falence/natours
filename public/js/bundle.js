@@ -41874,8 +41874,8 @@ var updateData = /*#__PURE__*/function () {
             _context.prev = 0;
             _context.next = 3;
             return (0, _axios.default)({
-              method: 'patch',
-              url: 'http://127.0.0.1:3000/api/v1/users/updateMe',
+              method: 'PATCH',
+              url: '/api/v1/users/updateMe',
               data: {
                 name: name,
                 email: email
@@ -42188,7 +42188,7 @@ var _updateSettings = require("./updateSettings");
 var mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
 var logoutBtn = document.querySelector('.nav__el--lougout');
-var updateDataForm = document.querySelector('form-user-data'); // DELEGATION
+var updateDataForm = document.querySelector('.form-user-data'); // DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -42243,7 +42243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57468" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60061" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

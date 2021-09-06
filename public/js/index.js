@@ -7,7 +7,7 @@ import { updateData } from './updateSettings'
 const mapBox = document.getElementById('map')
 const loginForm = document.querySelector('.form--login')
 const logoutBtn = document.querySelector('.nav__el--lougout')
-const updateDataForm = document.querySelector('form-user-data')
+const updateDataForm = document.querySelector('.form-user-data')
 
 // DELEGATION
 if (mapBox) {
