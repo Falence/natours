@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Falence/natours#readme",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@stripe/stripe-js": "^1.21.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
@@ -43,7 +44,7 @@
     "pug": "^3.0.2",
     "sharp": "^0.29.1",
     "slugify": "^1.5.3",
-    "stripe": "^8.184.0",
+    "stripe": "^8.187.0",
     "validator": "^13.6.0",
     "xss-clean": "^0.1.1"
   },
