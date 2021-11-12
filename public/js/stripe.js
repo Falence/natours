@@ -2,7 +2,6 @@ import '@babel/polyfill'
 import axios from 'axios'
 import { showAlert } from './alerts'
 import Stripe from 'stripe'
-const stripe = Stripe('pk_test_51JOu31DsKdZUZX4OdjHoaBbgoxHARXY4rN8VuG0W4UWRgivVrvr8sn4cffO7gSrqYoIeP23yb9vcAsgngMZGqzyg008ogPRGXN')
 
 export const bookTour = async tourId => {
   try {
