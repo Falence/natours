@@ -31,7 +31,7 @@ export const logout = async () => {
             url: '/api/v1/users/logout'
         })
         showAlert('success', 'Logged out successfully')
-        if (res.data.status === 'success') location.reload(true) // reloads from the server and not from the browser's cache
+        if (res.data.status === 'success') location.assign('/') // reloads from the server and not from the browser's cache
     } catch(err) {
         showAlert('error', 'Error logging out! Try again!')
     }
